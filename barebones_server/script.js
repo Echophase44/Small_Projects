@@ -1,7 +1,7 @@
-document.querySelector("clickMe").addEventListener("click", getData);
+document.querySelector("#clickMe").addEventListener("click", getData);
 
 async function getData() {
-  const cardName = document.querySelector("#cardName").value;
+  const cardName = document.querySelector("#inputCardName").value;
   const res = await fetch(`/api?card=${cardName}`);
   const data = await res.json();
 
