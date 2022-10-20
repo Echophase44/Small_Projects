@@ -1,6 +1,69 @@
 *{
-  display: block;
-	margin: 0;
-	padding: 0;
-	border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+}
+
+body{
+  background-color: #dddd;
+}
+
+/* ######################### Header #################### */
+
+header{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+  border-bottom: 1px solid black;
+}
+
+h1{
+  font-size: 3rem;
+}
+
+#playBtn{
+  font-size: 25px;
+  border-radius: 5px;
+  padding: 3px 25px;
+}
+
+#playBtn:hover{
+  background-color: rgb(162, 162, 162);
+  transition: .3s;
+  cursor: pointer;
+}
+
+/* ######################### Gameboard #################### */
+
+#gameContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+#gameBoard{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 45px;
+}
+
+.cell{
+  width: 125px;
+  height: 125px;
+  background-color: bisque;
+  border: 1px solid black;
+}
+
+.cell:hover{
+  background-color: rgb(254, 241, 225);
+  transition: .3s;
+}
+
+#gameMessage{
+  font-size: 2rem;
 }
