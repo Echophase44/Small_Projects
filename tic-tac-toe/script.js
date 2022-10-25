@@ -1,21 +1,14 @@
-//Play Game
-//Create Player 1
-//Assign X
-//Create Player 2
-//Assign O
-//Create Game
-//Switch between players
-//Have each player build their own array to compare against winning arrays
-//Compare each array against winning arrays
-
-// ######################### Click to Start Game#########################
-const playBtn = document.querySelector("#playBtn");
-playBtn.addEventListener("click", () => {
-  playGame();
+// ######################### Click to Restart #########################
+const restartBtn = document.querySelector("#restartBtn");
+restartBtn.addEventListener("click", () => {
+  //restartGame();
 });
 
-// ######################### Main Game #########################
-const playGame = () => {
+// ######################### Game Controller #########################
+const playGame = (() => {
+  //create playerX
+  //create playerO
+  //round count
   const cell = document.querySelectorAll(".cell");
   cell.forEach((element) => {
     element.addEventListener("click", () => {
@@ -23,5 +16,17 @@ const playGame = () => {
     });
   });
 
+  //const change main player()
+  //compare answers to winning answers
+
   // const resetGame()
-};
+})();
+
+// ######################### Create Players #########################
+//const create player()
+//sign = sign
+//answer key
+
+// ######################### Game Board #########################
+// const gameBoard =()
+//
