@@ -7,7 +7,11 @@ const Player = (sign) => {
     return answers;
   };
 
-  return { getAnswers };
+  const getSign = () => {
+    return sign;
+  };
+
+  return { getAnswers, getSign, answers };
 };
 
 // ######################### Game Controller #########################
@@ -20,17 +24,19 @@ const playGame = (() => {
   cell.forEach((element) => {
     element.addEventListener("click", () => {
       if (element.textContent != "") return;
-      element.textContent = getCurrentPlayer();
+      element.textContent = getCurrentPlayer().getSign();
+      getCurrentPlayer().answers.push(parseInt(element.dataset.index));
+      checkForWinner(getCurrentPlayer().answers);
       round++;
     });
   });
 
   const getCurrentPlayer = () => {
-    let currentPlayer = "";
+    let currentPlayer = playerX;
     if (round % 2 === 0) {
-      currentPlayer = "X";
+      currentPlayer = playerX;
     } else {
-      currentPlayer = "O";
+      currentPlayer = playerO;
     }
     return currentPlayer;
   };
@@ -40,16 +46,42 @@ const playGame = (() => {
       element.textContent = "";
     });
     round = 0;
+    playerO.answers = [];
+    playerX.answers = [];
+  };
+
+  const checkForWinner = (answerKey) => {
+    console.log(answerKey);
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    winConditions.forEach((condition) => {
+      let count = 0;
+      answerKey.forEach((answer) => {
+        if (condition.includes(answer)) {
+          count++;
+        }
+        if (count === 3) {
+          console.log("You win");
+        }
+      });
+      count = 0;
+    });
   };
 
   //compare answers to winning answers
   return { resetGame };
 })();
 
-// ######################### Game Board #########################
-// const gameBoard =()
-
-// ######################### Click to Restart #########################
+// ######################### Restart Game Button #########################
 const restartBtn = document.querySelector("#restartBtn");
 restartBtn.addEventListener("click", () => {
   playGame.resetGame();
