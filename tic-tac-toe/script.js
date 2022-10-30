@@ -19,14 +19,16 @@ const playGame = (() => {
   const playerX = Player("X");
   const playerO = Player("O");
   let round = 0;
+  let winner = false;
 
   const cell = document.querySelectorAll(".cell");
   cell.forEach((element) => {
     element.addEventListener("click", () => {
-      if (element.textContent != "") return;
+      if (element.textContent != "" || winner === true) return;
       element.textContent = getCurrentPlayer().getSign();
       getCurrentPlayer().answers.push(parseInt(element.dataset.index));
       checkForWinner(getCurrentPlayer().answers);
+      updateMessage();
       round++;
     });
   });
@@ -48,10 +50,10 @@ const playGame = (() => {
     round = 0;
     playerO.answers = [];
     playerX.answers = [];
+    winner = false;
   };
 
   const checkForWinner = (answerKey) => {
-    console.log(answerKey);
     const winConditions = [
       [0, 1, 2],
       [3, 4, 5],
@@ -70,14 +72,26 @@ const playGame = (() => {
           count++;
         }
         if (count === 3) {
-          console.log("You win");
+          winner = true;
         }
       });
       count = 0;
     });
   };
 
-  //compare answers to winning answers
+  const updateMessage = () => {
+    const gameMessage = document.querySelector("#gameMessage");
+    if (winner === true) {
+      gameMessage.innerText = `Player ${getCurrentPlayer().getSign()} Won!`;
+      return;
+    } else if (round === 8) {
+      gameMessage.innerText = "It's a draw!";
+    } else if (getCurrentPlayer().getSign() === "X") {
+      gameMessage.textContent = "Player O's Turn";
+    } else if (getCurrentPlayer().getSign() === "O") {
+      gameMessage.textContent = "Player X's Turn";
+    }
+  };
   return { resetGame };
 })();
 
